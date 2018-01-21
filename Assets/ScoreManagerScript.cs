@@ -6,10 +6,13 @@ public class ScoreManagerScript : MonoBehaviour {
 
 	public static ScoreManagerScript instance;
 	public int score;
+	public int diamondScore;
+	public BallController ballController;
 	void Awake(){
 		if (instance == null) {
 			instance = this;
 		}
+		diamondScore = 0;
 	}
 
 	// Use this for initialization
@@ -42,6 +45,14 @@ public class ScoreManagerScript : MonoBehaviour {
 		} else {
 			PlayerPrefs.SetInt ("highScore", score);
 		}
+		/*int diamondCount = PlayerPrefs.GetInt ("diamondScore");
+		if (PlayerPrefs.HasKey ("diamondScore")) {
+			PlayerPrefs.SetInt ("diamondScore", diamondScore + diamondCount );
+		} else {
+			PlayerPrefs.SetInt ("diamondScore", diamondScore);
+		}
+		*/
+
 	}
 
 }

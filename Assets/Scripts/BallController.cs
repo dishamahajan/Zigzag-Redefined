@@ -33,6 +33,7 @@ public class BallController : MonoBehaviour {
 				muteButton.image.sprite = unMute;
 				diamondAudioController.diamondAudioSource.mute = false;
 			}
+
 			//ChangeMute ();
 		} else {
 			diamondAudioController.diamondAudioSource.mute = false;
@@ -101,6 +102,11 @@ public class BallController : MonoBehaviour {
 	void OnTriggerEnter(Collider col){ 
 		if(col.gameObject.tag == "diamond"){
 			GameObject part = Instantiate (partical , col.gameObject.transform.position, Quaternion.identity) as GameObject;
+			if (PlayerPrefs.HasKey ("diamondScore1")) {
+				PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") + 1);
+			} else {
+				PlayerPrefs.SetInt ("diamondScore1", 1);
+			}
 			Destroy (col.gameObject); 
 			Destroy (part, 2f);
 		}
