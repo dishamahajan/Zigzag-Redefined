@@ -142,6 +142,6 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 e5ac49e92e96952575f4061e7fdc7d12 Assembly-CSharp.dll:.PlaformSpawner
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-f21654dceeb3974d802c2de52a958e52 Assembly-CSharp.dll:.UIManager
+3b8f3bc8f2377ffa666362074cd297c6 Assembly-CSharp.dll:.UIManager
 334db473fa7b2f42fe39a0bd0cb736a7 Assembly-CSharp.dll:.AudioManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GooglePlayGames.OurUtils.PlayGamesHelperObject

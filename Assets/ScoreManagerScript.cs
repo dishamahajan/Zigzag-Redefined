@@ -31,7 +31,7 @@ public class ScoreManagerScript : MonoBehaviour {
 	}
 
 	public void startScore(){
-		InvokeRepeating ("incrementScore", 0.1f, 0.3f);
+		InvokeRepeating ("incrementScore", 0.1f, 0.5f);
 	}
 
 	public void stopScore(){
