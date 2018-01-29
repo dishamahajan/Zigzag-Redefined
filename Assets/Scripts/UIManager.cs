@@ -57,6 +57,10 @@ public class UIManager : MonoBehaviour {
 		gameOverPanel.SetActive (true);
 		scoreText.enabled = false;
 		pauseButton.gameObject.SetActive (false);
+		if (Time.timeScale == 0) {
+			pauseButton.image.sprite = pauseImage;
+			Time.timeScale = 1;
+		} 
 	}
 
 	public void Reset(){

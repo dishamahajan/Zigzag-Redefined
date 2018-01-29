@@ -17,6 +17,7 @@ public class BallController : MonoBehaviour {
 	public Button muteButton;
 	public Sprite mute;
 	public Sprite unMute;
+	private bool isAndroid;
 
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
@@ -50,6 +51,7 @@ public class BallController : MonoBehaviour {
 	void Update () {
 
 		if (Application.platform == RuntimePlatform.Android) {
+			isAndroid = true;
 			if (!started) {
 				if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
 					int pointerId = Input.GetTouch (0).fingerId;
@@ -62,6 +64,7 @@ public class BallController : MonoBehaviour {
 				}
 			}
 		} else {
+			isAndroid = false;
 			if (!started) {
 				if (Input.GetMouseButtonDown (0)) {
 					if (!EventSystem.current.IsPointerOverGameObject ()) {
@@ -84,7 +87,13 @@ public class BallController : MonoBehaviour {
 			GameManager.instance.GameOver ();
 		}
 
-		if (Input.GetMouseButtonDown (0) && !gameOver) {
+
+		if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
+			int pointerId = Input.GetTouch (0).fingerId;
+			if (!EventSystem.current.IsPointerOverGameObject (pointerId) && !gameOver) {
+				SwitchDirection ();
+			}
+		}else if(Input.GetMouseButtonDown (0) && !gameOver) {
 			SwitchDirection ();
 		}
 

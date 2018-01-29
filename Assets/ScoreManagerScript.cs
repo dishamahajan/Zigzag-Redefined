@@ -31,7 +31,7 @@ public class ScoreManagerScript : MonoBehaviour {
 	}
 
 	public void startScore(){
-		InvokeRepeating ("incrementScore", 0.1f, 0.5f);
+		InvokeRepeating ("incrementScore", 0.1f, 0.4f);
 	}
 
 	public void stopScore(){
@@ -45,14 +45,6 @@ public class ScoreManagerScript : MonoBehaviour {
 		} else {
 			PlayerPrefs.SetInt ("highScore", score);
 		}
-		/*int diamondCount = PlayerPrefs.GetInt ("diamondScore");
-		if (PlayerPrefs.HasKey ("diamondScore")) {
-			PlayerPrefs.SetInt ("diamondScore", diamondScore + diamondCount );
-		} else {
-			PlayerPrefs.SetInt ("diamondScore", diamondScore);
-		}
-		*/
-
 	}
 
 }
