@@ -36,7 +36,7 @@ public class PlaformSpawner : MonoBehaviour {
 	void SpawnPlatforms (){
 		
 		int random = Random.Range (0, 6);
-		if(platformCount++ != 0 && platformCount % 75 == 0) {
+		if(platformCount++ != 0 && platformCount % 110 == 0) {
 			flag = true;
 			newColor = new Color (Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f), Random.Range (0.0f, 1.0f));
 		}

@@ -41,7 +41,8 @@ public class UIManager : MonoBehaviour {
 
 	public void GameStart(){
 		
-		tapText.GetComponent<Animator> ().Play ("textDown");
+		//tapText.GetComponent<Animator> ().Play ("textDown");
+		tapText.SetActive(false);
 		zigZagPanel.GetComponent<Animator> ().Play ("PanelUp");
 		diamondPanel.SetActive(false);
 		leaderBoardButton.SetActive (false); 
