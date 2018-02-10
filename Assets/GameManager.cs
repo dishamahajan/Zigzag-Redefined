@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (!gameOver) {
+			AchievementManager.instance.CheckAchievements ();
+		}
 	}
 
 	public void StartGame(){
@@ -30,11 +32,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver(){
-		
-		UIManager.instance.GameOver ();
 		ScoreManagerScript.instance.stopScore ();
-		LeaderBoardManager.instance.AddScoreToLeaderBoard ();
 		gameOver = true;
+		UIManager.instance.GameOver ();
+		LeaderBoardManager.instance.AddScoreToLeaderBoard ();
+		UnityAdManager.instance.ShowAd ();
 	}
 		
 }

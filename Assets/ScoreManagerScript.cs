@@ -1,4 +1,4 @@
-﻿	using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class ScoreManagerScript : MonoBehaviour {
 	}
 
 	public void startScore(){
-		InvokeRepeating ("incrementScore", 0.1f, 0.4f);
+		InvokeRepeating ("incrementScore", 0.1f, 0.3f);
 	}
 
 	public void stopScore(){

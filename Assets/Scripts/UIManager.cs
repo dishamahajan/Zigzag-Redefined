@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject gameOverPanel;
 	public GameObject tapText;
 	public GameObject leaderBoardButton;
+	public GameObject AchievementButton;
 	public GameObject MuteButton;
 	public GameObject ShareButton;
 	public Button pauseButton;
@@ -45,7 +46,8 @@ public class UIManager : MonoBehaviour {
 		tapText.SetActive(false);
 		zigZagPanel.GetComponent<Animator> ().Play ("PanelUp");
 		diamondPanel.SetActive(false);
-		leaderBoardButton.SetActive (false); 
+		leaderBoardButton.SetActive (false);
+		AchievementButton.SetActive (false);
 		scoreText.enabled = true;
 		pauseButton.gameObject.SetActive (true);
 		MuteButton.SetActive (false);
@@ -54,7 +56,7 @@ public class UIManager : MonoBehaviour {
 
 	public void GameOver(){
 		score.text = PlayerPrefs.GetInt ("score").ToString();
-		highScore2.text = PlayerPrefs.GetInt ("highScore").ToString();
+		highScore2.text = PlayerPrefs.GetInt ("highScore").ToString(); 	
 		gameOverPanel.SetActive (true);
 		scoreText.enabled = false;
 		pauseButton.gameObject.SetActive (false);
@@ -76,7 +78,11 @@ public class UIManager : MonoBehaviour {
 	public void ShowLeaderBoard(){
 		LeaderBoardManager.instance.ShowLeaderBoard ();
 	}
-		
+
+	public void ShowAchievements(){
+		AchievementManager.instance.ShowAchievements();
+	}
+
 	public void pause(){
 		if (Time.timeScale == 1) {
 			pauseButton.image.sprite = playImage;

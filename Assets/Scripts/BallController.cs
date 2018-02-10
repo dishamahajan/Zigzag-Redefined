@@ -19,6 +19,19 @@ public class BallController : MonoBehaviour {
 	public Sprite unMute;
 	private bool isAndroid;
 
+	public void playVolume(){
+
+		if (PlayerPrefs.HasKey ("mute")) {
+			if (PlayerPrefs.GetString ("mute").Equals ("false")) {
+				if (Time.timeScale == 1) {
+					am.gameSound.mute = false;
+				} else {
+					am.gameSound.mute = true;
+				}
+			}
+		}
+	}
+
 	void Awake(){
 		rb = GetComponent<Rigidbody> ();
 		am.gameSound.Play ();
@@ -34,8 +47,6 @@ public class BallController : MonoBehaviour {
 				muteButton.image.sprite = unMute;
 				diamondAudioController.diamondAudioSource.mute = false;
 			}
-
-			//ChangeMute ();
 		} else {
 			diamondAudioController.diamondAudioSource.mute = false;
 		}
@@ -77,7 +88,7 @@ public class BallController : MonoBehaviour {
 			}
 		}
 		 
-		if (!Physics.Raycast (transform.position, Vector3.down, 1f)) {
+		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver) {
 			am.gameSound.Stop ();
 			am.gameOverSound.Play ();
 			gameOver = true;
