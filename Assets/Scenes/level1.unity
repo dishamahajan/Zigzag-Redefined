@@ -418,8 +418,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.48842335, z: 1}
+  m_Center: {x: 0, y: 0.72288036, z: 0}
 --- !u!1 &275680654
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +610,7 @@ Transform:
   m_LocalScale: {x: 0.23768155, y: 0.6367421, z: -0.5613765}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 36.157, y: -129.298, z: -141.378}
 --- !u!1 &361637007
 GameObject:
@@ -817,7 +817,7 @@ Transform:
   m_Children:
   - {fileID: 279911948}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &377298581
 Rigidbody:
@@ -910,7 +910,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1636273082}
-        m_MethodName: Share
+        m_MethodName: ShareHignScore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1355,7 +1355,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4013240723480868, guid: caf30a0fe857f5d4ea194f1b61c4bdd6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.600006
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4013240723480868, guid: caf30a0fe857f5d4ea194f1b61c4bdd6, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2068,7 +2068,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845456442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -166.14998, y: -279, z: 0}
+  m_LocalPosition: {x: -166.15001, y: -279, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 503058488}
@@ -2078,7 +2078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -166.15, y: -279}
+  m_AnchoredPosition: {x: -166.15001, y: -279}
   m_SizeDelta: {x: -332.3, y: -644.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &845456444
@@ -2186,6 +2186,16 @@ Prefab:
     - target: {fileID: 1396760202175178, guid: 13e9b69e0c1283a4d968c8ecc87d7a0d, type: 2}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 65966942345272630, guid: 13e9b69e0c1283a4d968c8ecc87d7a0d,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.48842335
+      objectReference: {fileID: 0}
+    - target: {fileID: 65966942345272630, guid: 13e9b69e0c1283a4d968c8ecc87d7a0d,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.72288036
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13e9b69e0c1283a4d968c8ecc87d7a0d, type: 2}
@@ -2750,7 +2760,7 @@ Transform:
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 20.478, y: -8.495001, z: 14.349001}
 --- !u!54 &995845279
 Rigidbody:
@@ -2759,12 +2769,12 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 995845274}
   serializedVersion: 2
-  m_Mass: 300
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!114 &995845280
@@ -2862,7 +2872,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1636273082}
-        m_MethodName: Share
+        m_MethodName: ShareCurrentScore
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3893,10 +3903,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &2147326790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3928,7 +3938,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 855601675}
-  m_PlaneDistance: 100
+  m_PlaneDistance: -100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

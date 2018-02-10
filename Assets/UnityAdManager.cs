@@ -26,7 +26,7 @@ public class UnityAdManager : MonoBehaviour {
 	}
 
 	public void ShowAd() {
-
+		
 		if (PlayerPrefs.HasKey ("AdCount")) {
 
 			if (PlayerPrefs.GetInt ("AdCount") == 3) {

@@ -139,6 +139,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TriggerCheckerStart
 57943582ff3018c63aab06ccad308149 Assembly-CSharp.dll:.CameraFollow
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
@@ -150,4 +151,3 @@ e5ac49e92e96952575f4061e7fdc7d12 Assembly-CSharp.dll:.PlaformSpawner
 b13ef6e9a118617b6da65ec68a090c36 Assembly-CSharp.dll:.UIManager
 334db473fa7b2f42fe39a0bd0cb736a7 Assembly-CSharp.dll:.AudioManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GooglePlayGames.OurUtils.PlayGamesHelperObject
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TriggerCheckerStart

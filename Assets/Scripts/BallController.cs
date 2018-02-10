@@ -99,12 +99,12 @@ public class BallController : MonoBehaviour {
 		}
 
 
-		if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) {
+		if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began && !gameOver && Time.timeScale == 1) {
 			int pointerId = Input.GetTouch (0).fingerId;
-			if (!EventSystem.current.IsPointerOverGameObject (pointerId) && !gameOver) {
+			if (!EventSystem.current.IsPointerOverGameObject (pointerId) ) {
 				SwitchDirection ();
 			}
-		}else if(Input.GetMouseButtonDown (0) && !gameOver) {
+		}else if(Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1) {
 			SwitchDirection ();
 		}
 
