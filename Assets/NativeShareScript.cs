@@ -102,4 +102,8 @@ public class NativeShareScript : MonoBehaviour {
 		Application.OpenURL("market://details?id=androidflashlightapp.inducesmile.com.myapp1");
 		#endif
 	}
+
+	public void PlayRewardedVideo(){
+		UnityAdManager.instance.ShowRewardedVideoAd();
+	}
 }

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class UIManager : MonoBehaviour {
 
 	public static UIManager instance;
 
 	public GameObject zigZagPanel;
+	public GameObject rewardPanel;
+	//public Button rewardVideo;
 	public GameObject diamondPanel;
 	public GameObject gameOverPanel;
 	public GameObject tapText;
@@ -17,11 +20,11 @@ public class UIManager : MonoBehaviour {
 	public GameObject MuteButton;
 	public GameObject ShareButton;
 	public Button pauseButton;
+	public Button scoreButton;
 	public Text DiamondText;
 	public Text score;
 	public Text highScore1;
 	public Text highScore2;
-	public Text scoreText; 
 
 	public Sprite pauseImage;
 	public Sprite playImage;
@@ -30,14 +33,20 @@ public class UIManager : MonoBehaviour {
 		if (instance == null) {
 			instance = this;
 		}
+		if (Advertisement.IsReady ("rewardedVedio1")) {
+			rewardPanel.SetActive (true);
+		} else {
+			rewardPanel.SetActive (false);
+		}
 	}
 
 	// Use this for initialization
 	void Start () {
 		pauseButton.gameObject.SetActive (false);
-		scoreText.enabled = false;
+		scoreButton.gameObject.SetActive (false);
 		highScore1.text = "High Score: "+ PlayerPrefs.GetInt ("highScore").ToString();
 		DiamondText.text = "x "+ PlayerPrefs.GetInt ("diamondScore1").ToString();
+
 	}
 
 	public void GameStart(){
@@ -48,17 +57,19 @@ public class UIManager : MonoBehaviour {
 		diamondPanel.SetActive(false);
 		leaderBoardButton.SetActive (false);
 		AchievementButton.SetActive (false);
-		scoreText.enabled = true;
+		scoreButton.gameObject.SetActive (true);
 		pauseButton.gameObject.SetActive (true);
 		MuteButton.SetActive (false);
 		ShareButton.SetActive (false);
+		//rewardVideo.gameObject.SetActive (false);
+		rewardPanel.SetActive (false);
 	}
 
 	public void GameOver(){
 		score.text = PlayerPrefs.GetInt ("score").ToString();
 		highScore2.text = PlayerPrefs.GetInt ("highScore").ToString(); 	
 		gameOverPanel.SetActive (true);
-		scoreText.enabled = false;
+		scoreButton.gameObject.SetActive (false);
 		pauseButton.gameObject.SetActive (false);
 		if (Time.timeScale == 0) {
 			pauseButton.image.sprite = pauseImage;
@@ -72,7 +83,8 @@ public class UIManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		scoreText.text = ScoreManagerScript.instance.score.ToString();
+		GameObject.Find("scoreButton").GetComponentInChildren<Text>().text = ScoreManagerScript.instance.score.ToString();
+
 	}
 
 	public void ShowLeaderBoard(){
