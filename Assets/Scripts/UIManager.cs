@@ -46,7 +46,6 @@ public class UIManager : MonoBehaviour {
 		scoreButton.gameObject.SetActive (false);
 		highScore1.text = "High Score: "+ PlayerPrefs.GetInt ("highScore").ToString();
 		DiamondText.text = "x "+ PlayerPrefs.GetInt ("diamondScore1").ToString();
-
 	}
 
 	public void GameStart(){
@@ -83,7 +82,8 @@ public class UIManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		GameObject.Find("scoreButton").GetComponentInChildren<Text>().text = ScoreManagerScript.instance.score.ToString();
+		
+		scoreButton.GetComponentInChildren<Text>().text = ScoreManagerScript.instance.score.ToString();
 
 	}
 

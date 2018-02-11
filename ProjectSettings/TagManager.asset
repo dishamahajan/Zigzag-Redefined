@@ -7,7 +7,6 @@ TagManager:
   - Ball
   - diamond
   - Platform
-  - scoreButton
   layers:
   - Default
   - TransparentFX
