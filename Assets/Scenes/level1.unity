@@ -1521,7 +1521,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 13846ff074630464bbf641d472be64f1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2eb37ea9a07e90d46a3916293bc33dda, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -1614,7 +1614,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: de6ee6a089964454ea079642398fe3de, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c15ebe4d2588c474d8f0f5c40220d574, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3016,12 +3016,12 @@ GameObject:
   - component: {fileID: 1237010846}
   - component: {fileID: 1237010848}
   - component: {fileID: 1237010847}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1237010846
 RectTransform:
@@ -3034,7 +3034,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2147326792}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3070,10 +3070,10 @@ MonoBehaviour:
     m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 0
 --- !u!222 &1237010848
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3770,7 +3770,7 @@ RectTransform:
   m_LocalScale: {x: 0.38127828, y: 1.7292612, z: 1}
   m_Children: []
   m_Father: {fileID: 2147326792}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3965,8 +3965,8 @@ RectTransform:
   - {fileID: 361637008}
   - {fileID: 841999484}
   - {fileID: 845456443}
-  - {fileID: 2057117376}
   - {fileID: 1237010846}
+  - {fileID: 2057117376}
   - {fileID: 1938517783}
   m_Father: {fileID: 0}
   m_RootOrder: 9
