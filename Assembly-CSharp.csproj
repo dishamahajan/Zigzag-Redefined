@@ -257,6 +257,7 @@
      <Compile Include="Assets\Scripts\TriggerChecker.cs" />
      <Compile Include="Assets\Scripts\UIManager.cs" />
      <Compile Include="Assets\StartIfClickedOnTapText.cs" />
+     <Compile Include="Assets\ToastMessage.cs" />
      <Compile Include="Assets\TriggerCheckerStart.cs" />
      <Compile Include="Assets\UnityAdManager.cs" />
      <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />

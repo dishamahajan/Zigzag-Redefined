@@ -97,8 +97,10 @@ public class UIManager : MonoBehaviour {
 
 	public void pause(){
 		if (Time.timeScale == 1) {
+			
 			pauseButton.image.sprite = playImage;
 			Time.timeScale = 0;
+			BallController.instance.SwitchDirection ();
 		} else {
 			pauseButton.image.sprite = pauseImage;
 			Time.timeScale = 1;

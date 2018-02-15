@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2b0937aecf7e7854a9ce77e1ea27e796
-timeCreated: 1516043689
+guid: 7edce9d2b37dd15408532c65439bee87
+timeCreated: 1518725830
 licenseType: Free
 TrueTypeFontImporter:
   externalObjects: {}
@@ -13,7 +13,8 @@ TrueTypeFontImporter:
   fontName: Calibri
   fontNames:
   - Calibri
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bfc5f7b8d2fe7b34488e9d97429b5a10, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

@@ -10,7 +10,7 @@ public class NativeShareScript : MonoBehaviour {
 	public void ShareHignScore()
 	{		
 		subject = "WORD-O-MAZE";
-		body = "My score is " +PlayerPrefs.GetInt ("highScore").ToString() + ". Can you beat my score?"  + "https://play.google.com/store/apps/details?id=androidflashlightapp.inducesmile.com.myapp1";
+		body = "My score is " +PlayerPrefs.GetInt ("highScore").ToString() + ". Can you beat my score?"  + "https://play.google.com/store/apps/details?id=com.appmec.zigzag";
 /*		#if UNITY_ANDROID
 		if(!isProcessing)
 			StartCoroutine( ShareScreenshot() );
@@ -38,7 +38,7 @@ public class NativeShareScript : MonoBehaviour {
 	public void ShareCurrentScore()
 	{		
 		subject = "WORD-O-MAZE";
-		body = "My score is " +PlayerPrefs.GetInt ("score").ToString() + ". Can you beat my score?"  + "https://play.google.com/store/apps/details?id=androidflashlightapp.inducesmile.com.myapp1";
+		body = "My score is " +PlayerPrefs.GetInt ("score").ToString() + ". Can you beat my score?"  + "https://play.google.com/store/apps/details?id=com.appmec.zigzag";
 		/*		#if UNITY_ANDROID
 		if(!isProcessing)
 			StartCoroutine( ShareScreenshot() );
@@ -67,7 +67,7 @@ public class NativeShareScript : MonoBehaviour {
 	public IEnumerator ShareScreenshot()
 	{
 	#if UNITY_ANDROID
-	url = "https://play.google.com/store/apps/details?id=androidflashlightapp.inducesmile.com.myapp1";
+		url = "https://play.google.com/store/apps/details?id=com.appmec.zigzag";
 	ShareMessage = "Can you beat my score?" + url;
 
 	isProcessing = true;
@@ -99,7 +99,7 @@ public class NativeShareScript : MonoBehaviour {
 	public void RateUs()
 	{
 		#if UNITY_ANDROID
-		Application.OpenURL("market://details?id=androidflashlightapp.inducesmile.com.myapp1");
+		Application.OpenURL("market://details?id=com.appmec.zigzag");
 		#endif
 	}
 

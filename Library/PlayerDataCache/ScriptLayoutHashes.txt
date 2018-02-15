@@ -151,3 +151,4 @@ e5ac49e92e96952575f4061e7fdc7d12 Assembly-CSharp.dll:.PlaformSpawner
 e86f297e4b37882b211102c934b34b0d Assembly-CSharp.dll:.UIManager
 334db473fa7b2f42fe39a0bd0cb736a7 Assembly-CSharp.dll:.AudioManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:GooglePlayGames.OurUtils.PlayGamesHelperObject
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ToastMessage

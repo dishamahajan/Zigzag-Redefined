@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class BallController : MonoBehaviour {
 
+	public static BallController instance;
+
 	[SerializeField]
 	private float speed;
 	public AudioManager am;
@@ -18,6 +20,10 @@ public class BallController : MonoBehaviour {
 	public Sprite mute;
 	public Sprite unMute;
 	private bool isAndroid;
+
+	private bool is300;
+	private bool is50;
+	private bool is20;
 
 	public void playVolume(){
 
@@ -33,6 +39,10 @@ public class BallController : MonoBehaviour {
 	}
 
 	void Awake(){
+
+		if (instance == null) {
+			instance = this;
+		}
 		rb = GetComponent<Rigidbody> ();
 		am.gameSound.Play ();
 		if (PlayerPrefs.HasKey ("mute")) {
@@ -60,29 +70,37 @@ public class BallController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (ScoreManagerScript.instance.score > 300 && !is300) {
+			speed = 9;
+			is300 = true;
+		}else if (ScoreManagerScript.instance.score > 50 && !is50) {
+			speed = 8;
+			is50 = true;
+		}else if (ScoreManagerScript.instance.score > 20 && !is20) {
+			speed = 7;
+			is20 = true;
+		}
 
-		if (Application.platform == RuntimePlatform.Android) {
-			isAndroid = true;
-			if (!started) {
-				if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
-					int pointerId = Input.GetTouch (0).fingerId;
-					if (!EventSystem.current.IsPointerOverGameObject (pointerId)) {
-						rb.velocity = new Vector3 (speed, 0, 0);
-						started = true;
+		if (!started) {
+			if (Application.platform == RuntimePlatform.Android) {
+				isAndroid = true;
+					if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) {
+						int pointerId = Input.GetTouch (0).fingerId;
+						if (!EventSystem.current.IsPointerOverGameObject (pointerId)) {
+							rb.velocity = new Vector3 (speed, 0, 0);
+							started = true;
 
-						GameManager.instance.StartGame ();
-					}
+							GameManager.instance.StartGame ();
+						}
 				}
-			}
-		} else {
-			isAndroid = false;
-			if (!started) {
-				if (Input.GetMouseButtonDown (0)) {
-					if (!EventSystem.current.IsPointerOverGameObject ()) {
-						rb.velocity = new Vector3 (speed, 0, 0);
-						started = true;
+			} else {
+				isAndroid = false;
+					if (Input.GetMouseButtonDown (0)) {
+						if (!EventSystem.current.IsPointerOverGameObject ()) {
+							rb.velocity = new Vector3 (speed, 0, 0);
+							started = true;
 
-						GameManager.instance.StartGame ();
+							GameManager.instance.StartGame ();
 					}
 				}
 			}
@@ -99,18 +117,21 @@ public class BallController : MonoBehaviour {
 		}
 
 
-		if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began && !gameOver && Time.timeScale == 1) {
+		/*if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began && !gameOver && Time.timeScale == 1) {
 			int pointerId = Input.GetTouch (0).fingerId;
 			if (!EventSystem.current.IsPointerOverGameObject (pointerId) ) {
 				SwitchDirection ();
 			}
 		}else if(Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1) {
 			SwitchDirection ();
+		}*/
+		if(Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1) {
+			SwitchDirection ();
 		}
 
 	}
 
-	void SwitchDirection(){
+	public void SwitchDirection(){
 		if (rb.velocity.z > 0) {
 			rb.velocity = new Vector3 (speed,0,0);		
 		}
