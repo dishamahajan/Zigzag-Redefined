@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BallController : MonoBehaviour {
 
@@ -24,6 +25,41 @@ public class BallController : MonoBehaviour {
 	private bool is300;
 	private bool is50;
 	private bool is20;
+	public GameObject quitobject;
+	private bool clickedBefore = false;
+
+	IEnumerator quitingTimer()
+	{
+		//Wait for a frame so that Input.GetKeyDown is no longer true
+		yield return null;
+
+		//3 seconds timer
+		const float timerTime = 3f;
+		float counter = 0;
+
+		while (counter < timerTime)
+		{
+			counter += Time.deltaTime;
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				Quit();
+			}
+			yield return null;
+		}
+
+		quitobject.SetActive(false);
+		clickedBefore = false;
+	}
+
+	void Quit()
+	{
+		#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+		#else
+		//Application.Quit();
+		System.Diagnostics.Process.GetCurrentProcess().Kill();
+		#endif
+	}
 
 	public void playVolume(){
 
@@ -70,6 +106,14 @@ public class BallController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (Input.GetKeyDown(KeyCode.Escape) && !clickedBefore)
+		{
+			clickedBefore = true;
+			quitobject.SetActive(true);
+			StartCoroutine(quitingTimer());
+		}
+
 		if (ScoreManagerScript.instance.score > 300 && !is300) {
 			speed = 9;
 			is300 = true;
