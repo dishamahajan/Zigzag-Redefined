@@ -19,6 +19,7 @@ public class TriggerChecker : MonoBehaviour {
 			Invoke ("FallDown", 0.5f);
 		}
 	}
+
 	void FallDown(){
 		GetComponentInParent<Rigidbody> ().useGravity = true;
 		GetComponentInParent<Rigidbody> ().isKinematic = false;

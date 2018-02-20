@@ -55,6 +55,7 @@
      <Compile Include="Assets\Achievements.cs" />
      <Compile Include="Assets\AudioManager.cs" />
      <Compile Include="Assets\DiamondAudioController.cs" />
+     <Compile Include="Assets\DiamondTriggerChecker.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
