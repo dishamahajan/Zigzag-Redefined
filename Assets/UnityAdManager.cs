@@ -28,8 +28,12 @@ public class UnityAdManager : MonoBehaviour {
 	public void ShowAd() {
 		
 		if (PlayerPrefs.HasKey ("AdCount")) {
-
-			if (PlayerPrefs.GetInt ("AdCount") == 5) {
+			if (PlayerPrefs.GetInt ("AdCount") == 3) {
+				if (Advertisement.IsReady ("video2")) {
+					Advertisement.Show ("video2");
+				}
+				PlayerPrefs.SetInt ("AdCount", PlayerPrefs.GetInt ("AdCount") + 1);
+			}else if (PlayerPrefs.GetInt ("AdCount") == 6) {
 				if (Advertisement.IsReady ("rewardedVideo")) {
 					Advertisement.Show ("rewardedVideo");
 				}
