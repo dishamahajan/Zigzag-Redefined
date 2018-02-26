@@ -13,12 +13,15 @@ public class BallController : MonoBehaviour {
 	private float speed;
 	public AudioManager am;
 	public GameObject partical;
+	public GameObject ball;
+	public GameObject saveMe;
 	bool started;
 	bool gameOver;
+	public bool saveMeFlag;
 	Rigidbody rb;
 	public DiamondAudioController diamondAudioController;
 	public Button muteButton;
-	public Sprite mute;
+	public Sprite mute; 
 	public Sprite unMute;
 	private bool isAndroid;
 
@@ -27,7 +30,7 @@ public class BallController : MonoBehaviour {
 	private bool is20;
 	public GameObject quitobject;
 	private bool clickedBefore = false;
-
+	Vector3 previousPorsition;
 	IEnumerator quitingTimer()
 	{
 		//Wait for a frame so that Input.GetKeyDown is no longer true
@@ -74,6 +77,27 @@ public class BallController : MonoBehaviour {
 		}
 	}
 
+	public void SaveMe (){
+		GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
+		saveMe.SetActive (false);
+		rb.velocity = new Vector3 (3, 0, 0); 
+		Camera.main.GetComponent<CameraFollow> ().gameOver = false;
+		ScoreManagerScript.instance.startScore ();
+
+	}
+
+	public void NotSaveMe(){
+		saveMe.SetActive (false);
+		am.gameSound.Stop ();
+		am.gameOverSound.Play ();
+		gameOver = true;
+		rb.velocity = new Vector3 (0, 0, 6); 
+		Camera.main.GetComponent<CameraFollow> ().gameOver = true;
+		GameManager.instance.GameOver ();
+	//	rb.velocity = new Vector3 (0, -25f, 0);
+
+	}
+
 	void Awake(){
 
 		if (instance == null) {
@@ -102,11 +126,11 @@ public class BallController : MonoBehaviour {
 	void Start () {
 		started = false;
 		gameOver = false;
+		saveMeFlag = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-
 		if (Input.GetKeyDown(KeyCode.Escape) && !clickedBefore)
 		{
 			clickedBefore = true;
@@ -151,24 +175,15 @@ public class BallController : MonoBehaviour {
 		}
 		 
 		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver) {
-			am.gameSound.Stop ();
-			am.gameOverSound.Play ();
-			gameOver = true;
-			rb.velocity = new Vector3 (0, -25f, 0);
-
-			Camera.main.GetComponent<CameraFollow> ().gameOver = true;
-			GameManager.instance.GameOver ();
+			ScoreManagerScript.instance.stopScore ();
+			saveMe.SetActive (true);
+			saveMeFlag = true;
+			transform.position = new Vector3 (PlaformSpawner.instance.lastPos.x, PlaformSpawner.instance.lastPos.y + 2, PlaformSpawner.instance.lastPos.z);
+			rb.velocity = new Vector3 (0, 0, 0); 
+			PlaformSpawner.instance.destroyPlatform ();
+			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().CancelSpawningPllatform ();
 		}
 
-
-		/*if (isAndroid && Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began && !gameOver && Time.timeScale == 1) {
-			int pointerId = Input.GetTouch (0).fingerId;
-			if (!EventSystem.current.IsPointerOverGameObject (pointerId) ) {
-				SwitchDirection ();
-			}
-		}else if(Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1) {
-			SwitchDirection ();
-		}*/
 		if(Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1) {
 			SwitchDirection ();
 		}
@@ -181,7 +196,7 @@ public class BallController : MonoBehaviour {
 		}
 		else if (rb.velocity.x > 0) {
 			rb.velocity = new Vector3 (0,0,speed);		
-		}		
+		}		 
 	}
 
 	void OnTriggerEnter(Collider col){ 

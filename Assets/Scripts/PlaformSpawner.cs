@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class PlaformSpawner : MonoBehaviour {
 
+	public static PlaformSpawner instance;
 	public GameObject platform;
 	public GameObject diamond;
 	public GameObject[] respawns;
+	public GameObject[] respawnsDiamond;
 	public bool flag = false;
-	Vector3 lastPos;
+	public Vector3 lastPos;
 	float size;
 	Color newColor;
 	public bool gameOver;
 	int platformCount = 0;
+
+	void Awake(){
+		if (instance == null) {
+			instance = this;
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
 			
@@ -29,8 +38,12 @@ public class PlaformSpawner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (GameManager.instance.gameOver == true) {
-			CancelInvoke("SpawnPlatforms");
+			CancelSpawningPllatform ();
 		}
+	}
+
+	public void CancelSpawningPllatform(){
+		CancelInvoke("SpawnPlatforms");
 	}
 
 	void SpawnPlatforms (){
@@ -53,7 +66,39 @@ public class PlaformSpawner : MonoBehaviour {
 			}
 		}
 	}
+	public void destroyPlatform(){
+		respawns = GameObject.FindGameObjectsWithTag("Platform");
+		foreach (GameObject respawn in respawns)
+		{
+			if (respawn != null) {					
+				if (respawn.transform.position.x < lastPos.x || respawn.transform.position.z < lastPos.z) {
+					Destroy (respawn, 0f);
+				}
+			}
 
+		}
+		respawnsDiamond = GameObject.FindGameObjectsWithTag("diamond");
+		foreach (GameObject respawn in respawnsDiamond)
+		{
+			if (respawn != null) {					
+				if (respawn.transform.position.x < lastPos.x || respawn.transform.position.z < lastPos.z) {
+					Destroy (respawn, 0f);
+				}
+			}
+
+		}
+
+		SpawnX ();
+		SpawnX ();
+		SpawnX ();
+		SpawnX ();
+		SpawnX ();
+		SpawnZ ();
+		SpawnZ ();
+		for (int i = 0; i < 15; i++){
+			SpawnPlatforms ();
+		}
+	}
 	void SpawnX(){
 		Vector3 pos = lastPos;
 		pos.x += size;

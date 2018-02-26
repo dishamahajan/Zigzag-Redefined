@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void GameOver(){
-		ScoreManagerScript.instance.stopScore ();
 		gameOver = true;
 		UIManager.instance.GameOver ();
 		LeaderBoardManager.instance.AddScoreToLeaderBoard ();
