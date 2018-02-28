@@ -39,6 +39,8 @@ public class BallController : MonoBehaviour {
 	bool diamondSaveMe;
 	bool videoSaveMe;
 	int minusDiamondCount;
+	int diamondSaveMeCount;
+	int videoSaveMeCount;
 	IEnumerator quitingTimer()
 	{
 		//Wait for a frame so that Input.GetKeyDown is no longer true
@@ -86,15 +88,19 @@ public class BallController : MonoBehaviour {
 
 	public void SaveMe () {
 		
-		if (videoSaveMe &&  Advertisement.IsReady ("rewardedVedio1")) {
-			UnityAdManager.instance.ShowRewardedVideoAdContinueGame ();
-			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
-			saveMe.SetActive (false);
-			transform.position = new Vector3 (PlaformSpawner.instance.lastPos.x, PlaformSpawner.instance.lastPos.y + 2, PlaformSpawner.instance.lastPos.z);
-			rb.velocity = new Vector3 (0, 0, 0); 
-			PlaformSpawner.instance.destroyPlatform ();
-			Camera.main.GetComponent<CameraFollow> ().gameOver = false;
-		} else if (diamondSaveMe) {
+		if (videoSaveMe) {
+			if (Advertisement.IsReady ("rewardedVedio1")) {
+				UnityAdManager.instance.ShowRewardedVideoAdContinueGame ();
+				GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
+				saveMe.SetActive (false);
+				transform.position = new Vector3 (PlaformSpawner.instance.lastPos.x, PlaformSpawner.instance.lastPos.y + 2, PlaformSpawner.instance.lastPos.z);
+				rb.velocity = new Vector3 (0, 0, 0); 
+				PlaformSpawner.instance.destroyPlatform ();
+				Camera.main.GetComponent<CameraFollow> ().gameOver = false;
+			} else {
+			
+			}
+		} else if (diamondSaveMe && !videoSaveMe) {
 			transform.position = new Vector3 (PlaformSpawner.instance.lastPos.x, PlaformSpawner.instance.lastPos.y + 2, PlaformSpawner.instance.lastPos.z);
 			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
 			rb.velocity = new Vector3 (0, 0, 0); 
@@ -103,6 +109,9 @@ public class BallController : MonoBehaviour {
 			PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") - minusDiamondCount);
 			saveMe.SetActive (false);
 			ResumeAfterVedio ();
+		} else {
+			NotSaveMe ();
+			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().CancelSpawningPllatform ();
 		}
 	}
 
@@ -110,9 +119,17 @@ public class BallController : MonoBehaviour {
 		rb.velocity = new Vector3 (3, 0, 0); 
 		ScoreManagerScript.instance.startScore ();
 		saveMeFlag = false;
+		if (diamondSaveMeCount == 1) {
+			diamondSaveMeCount = 2;
+		}
+		if (videoSaveMeCount == 1) {
+			videoSaveMeCount = 2;
+		}
 	}
 
 	public void NotSaveMe(){
+		diamondSaveMeCount = 0;
+		videoSaveMeCount = 0;
 		saveMe.SetActive (false);
 		am.gameSound.Stop ();
 		am.gameOverSound.Play ();
@@ -155,6 +172,8 @@ public class BallController : MonoBehaviour {
 		saveMeFlag = false;
 		videoSaveMe = false;
 		diamondSaveMe = false;
+		diamondSaveMeCount = 0;
+		videoSaveMeCount = 0;
 	}
 
 	// Update is called once per frame
@@ -201,18 +220,19 @@ public class BallController : MonoBehaviour {
 				}
 			}
 			 
-			if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver) {
+		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver && diamondSaveMeCount != 1 && videoSaveMeCount != 1) {
 				ScoreManagerScript.instance.stopScore ();
 		//	if (!diamondSaveMe || !videoSaveMe) {
-				if ((ScoreManagerScript.instance.score > 20 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 199) || (ScoreManagerScript.instance.score > 499 && PlayerPrefs.GetInt ("diamondScore1") > 999)) {
-					diamondSaveMe = true;	
+			Debug.Log("disha........"+diamondSaveMeCount);
+			if (diamondSaveMeCount < 1 && ((ScoreManagerScript.instance.score > 20 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 249) || (ScoreManagerScript.instance.score > 110 && PlayerPrefs.GetInt ("diamondScore1") > 999))){
+				diamondSaveMe = true;	
 					Text footext = SaveText.GetComponent<Text> ();
 					if (ScoreManagerScript.instance.score > 499) {
 						minusDiamondCount = 1000;
 						footext.text = "Get a life- 1000 ";
 					} else {
-						minusDiamondCount = 200;
-						footext.text = "Get a life - 500 ";
+						minusDiamondCount = 500;
+						footext.text = "Get a life - 250 ";
 					}
 					SaveImageVideo.SetActive (false);
 					SaveImageDiamond.SetActive (true);
@@ -220,8 +240,10 @@ public class BallController : MonoBehaviour {
 					saveMeFlag = true;
 					Camera.main.GetComponent<CameraFollow> ().gameOver = true;
 					rb.velocity = new Vector3 (0, -25f, 0);
-				} else if (ScoreManagerScript.instance.score > 20) {
-					videoSaveMe = true;
+				diamondSaveMeCount = 1;	
+			} else if (videoSaveMeCount == 0 && ScoreManagerScript.instance.score > 20) {
+				videoSaveMeCount = 1;	
+				videoSaveMe = true;
 					Text footext = SaveText.GetComponent<Text> ();
 					footext.text = "Get a life by watching a short Video!      ";
 					SaveImageDiamond.SetActive (false);
@@ -232,7 +254,8 @@ public class BallController : MonoBehaviour {
 					rb.velocity = new Vector3 (0, -25f, 0);
 		//		}
 			}else {
-				NotSaveMe ();
+				if(videoSaveMeCount != 1 && diamondSaveMeCount != 1)
+					NotSaveMe ();
 			}
 			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().CancelSpawningPllatform ();
 			}

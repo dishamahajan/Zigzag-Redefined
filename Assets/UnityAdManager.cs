@@ -54,7 +54,7 @@ public class UnityAdManager : MonoBehaviour {
 	public void ShowRewardedVideoAd() {
 			Advertisement.Show ("rewardedVedio1");
 			if (PlayerPrefs.HasKey ("diamondScore1")) {
-				PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") + 20);
+				PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") + 20000);
 			} else {
 				PlayerPrefs.SetInt ("diamondScore1", 10000);
 			}
