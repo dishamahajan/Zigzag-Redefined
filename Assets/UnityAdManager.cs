@@ -56,8 +56,29 @@ public class UnityAdManager : MonoBehaviour {
 			if (PlayerPrefs.HasKey ("diamondScore1")) {
 				PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") + 20);
 			} else {
-				PlayerPrefs.SetInt ("diamondScore1", 20);
+				PlayerPrefs.SetInt ("diamondScore1", 10000);
 			}
 	}
+		
+	public void ShowRewardedVideoAdContinueGame() {
+		var options = new ShowOptions { resultCallback = HandleShowResult };
+		Advertisement.Show("rewardedVedio1", options);
+	}
 
+	private void HandleShowResult(ShowResult result)
+	{
+		switch (result)
+		{
+		case ShowResult.Finished:
+			Debug.Log ("The ad was successfully shown.");
+			BallController.instance.ResumeAfterVedio ();
+			break;
+		case ShowResult.Skipped:
+			Debug.Log("The ad was skipped before reaching the end.");
+			break;
+		case ShowResult.Failed:
+			Debug.LogError("The ad failed to be shown.");
+			break;
+		}
+	}
 }
