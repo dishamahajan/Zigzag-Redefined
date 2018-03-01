@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour {
 	public Text DiamondText;
 	public Text score;
 	public Text highScore1;
+	public Text rounds;
 	public Text highScore2;
 
 	public Sprite pauseImage;
@@ -44,7 +45,8 @@ public class UIManager : MonoBehaviour {
 	void Start () {
 		pauseButton.gameObject.SetActive (false);
 		scoreButton.gameObject.SetActive (false);
-		highScore1.text = "High Score: "+ PlayerPrefs.GetInt ("highScore").ToString();
+		highScore1.text = "Best Score: "+ PlayerPrefs.GetInt ("highScore").ToString();
+		rounds.text = "Games Played: "+ PlayerPrefs.GetInt ("Round").ToString();
 		DiamondText.text = "x "+ PlayerPrefs.GetInt ("diamondScore1").ToString();
 	}
 

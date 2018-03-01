@@ -2,11 +2,6 @@
 
 public class ToastMessage : MonoBehaviour
 {
-	string toastString;
-	string input;
-	AndroidJavaObject currentActivity;
-	AndroidJavaClass UnityPlayer;
-	AndroidJavaObject context;
 	public static ToastMessage instance;
 
 	void Awake(){
@@ -14,6 +9,13 @@ public class ToastMessage : MonoBehaviour
 			instance = this;
 		}
 	}
+
+
+	string toastString;
+	string input;
+	AndroidJavaObject currentActivity;
+	AndroidJavaClass UnityPlayer;
+	AndroidJavaObject context;
 
 	void Start()
 	{

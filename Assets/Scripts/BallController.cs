@@ -29,7 +29,7 @@ public class BallController : MonoBehaviour {
 	private bool is300;
 	private bool is50;
 	private bool is20;
-	public GameObject quitobject;
+	public GameObject internetConnection;
 	private bool clickedBefore = false;
 	Vector3 previousPorsition;
 
@@ -41,6 +41,38 @@ public class BallController : MonoBehaviour {
 	int minusDiamondCount;
 	int diamondSaveMeCount;
 	int videoSaveMeCount;
+
+	string toastString;
+	string input;
+	AndroidJavaObject currentActivity;
+	AndroidJavaClass UnityPlayer;
+	AndroidJavaObject context;
+
+	void Start1()
+	{
+		if (Application.platform == RuntimePlatform.Android)
+		{
+			UnityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+			currentActivity = UnityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+			context = currentActivity.Call<AndroidJavaObject>("getApplicationContext");
+		}
+	}
+
+
+	public void showToastOnUiThread(string toastString)
+	{
+		this.toastString = toastString;
+		currentActivity.Call("runOnUiThread", new AndroidJavaRunnable(showToast));
+	}
+
+	void showToast()
+	{
+		AndroidJavaClass Toast = new AndroidJavaClass("android.widget.Toast");
+		AndroidJavaObject javaString = new AndroidJavaObject("java.lang.String", toastString);
+		AndroidJavaObject toast = Toast.CallStatic<AndroidJavaObject>("makeText", context, javaString, Toast.GetStatic<int>("LENGTH_SHORT"));
+		toast.Call("show");
+	}
+
 	IEnumerator quitingTimer()
 	{
 		//Wait for a frame so that Input.GetKeyDown is no longer true
@@ -60,7 +92,7 @@ public class BallController : MonoBehaviour {
 			yield return null;
 		}
 
-		quitobject.SetActive(false);
+//		quitobject.SetActive(false);
 		clickedBefore = false;
 	}
 
@@ -89,7 +121,8 @@ public class BallController : MonoBehaviour {
 	public void SaveMe () {
 		
 		if (videoSaveMe) {
-			if (Advertisement.IsReady ("rewardedVedio1")) {
+			if (Advertisement.IsReady ("rewardedVedio")) {
+				internetConnection.SetActive (false);
 				UnityAdManager.instance.ShowRewardedVideoAdContinueGame ();
 				GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
 				saveMe.SetActive (false);
@@ -98,7 +131,8 @@ public class BallController : MonoBehaviour {
 				PlaformSpawner.instance.destroyPlatform ();
 				Camera.main.GetComponent<CameraFollow> ().gameOver = false;
 			} else {
-			
+			//	showToastOnUiThread ("Please check your internet connection");
+				internetConnection.SetActive (true);
 			}
 		} else if (diamondSaveMe && !videoSaveMe) {
 			transform.position = new Vector3 (PlaformSpawner.instance.lastPos.x, PlaformSpawner.instance.lastPos.y + 2, PlaformSpawner.instance.lastPos.z);
@@ -116,6 +150,10 @@ public class BallController : MonoBehaviour {
 	}
 
 	public void ResumeAfterVedio(){
+		UIManager.instance.pauseButton.gameObject.SetActive (true);
+		if(PlayerPrefs.GetString ("mute").Equals ("false")){
+			am.gameSound.mute = false;	
+		}
 		rb.velocity = new Vector3 (3, 0, 0); 
 		ScoreManagerScript.instance.startScore ();
 		saveMeFlag = false;
@@ -128,6 +166,13 @@ public class BallController : MonoBehaviour {
 	}
 
 	public void NotSaveMe(){
+		internetConnection.SetActive(false);
+		if (PlayerPrefs.HasKey ("Round")) {
+			PlayerPrefs.SetInt ("Round", PlayerPrefs.GetInt ("Round") + 1);
+		} else {
+			PlayerPrefs.SetInt ("Round", 1);
+		}
+
 		diamondSaveMeCount = 0;
 		videoSaveMeCount = 0;
 		saveMe.SetActive (false);
@@ -138,7 +183,6 @@ public class BallController : MonoBehaviour {
 		Camera.main.GetComponent<CameraFollow> ().gameOver = true;
 		GameManager.instance.GameOver ();
 		rb.velocity = new Vector3 (0, -25f, 0);
-
 	}
 
 	void Awake(){
@@ -167,6 +211,7 @@ public class BallController : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		Start1 ();
 		started = false;
 		gameOver = false;
 		saveMeFlag = false;
@@ -180,7 +225,8 @@ public class BallController : MonoBehaviour {
 	void Update () {
 			if (Input.GetKeyDown (KeyCode.Escape) && !clickedBefore) {
 				clickedBefore = true;
-				quitobject.SetActive (true);
+			//internetConnection.SetActive (true);
+				showToastOnUiThread ("Press again to exit!");
 				StartCoroutine (quitingTimer ());
 			}
 
@@ -222,18 +268,18 @@ public class BallController : MonoBehaviour {
 			 
 		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver && diamondSaveMeCount != 1 && videoSaveMeCount != 1) {
 				ScoreManagerScript.instance.stopScore ();
-		//	if (!diamondSaveMe || !videoSaveMe) {
-			Debug.Log("disha........"+diamondSaveMeCount);
 			if (diamondSaveMeCount < 1 && ((ScoreManagerScript.instance.score > 20 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 249) || (ScoreManagerScript.instance.score > 110 && PlayerPrefs.GetInt ("diamondScore1") > 999))){
-				diamondSaveMe = true;	
+					diamondSaveMe = true;	
 					Text footext = SaveText.GetComponent<Text> ();
-					if (ScoreManagerScript.instance.score > 499) {
+					if (ScoreManagerScript.instance.score > 999) {
 						minusDiamondCount = 1000;
 						footext.text = "Get a life- 1000 ";
 					} else {
 						minusDiamondCount = 500;
-						footext.text = "Get a life - 250 ";
+						footext.text = "Get a life - 500 ";
 					}
+					am.gameSound.mute = true;	
+					UIManager.instance.pauseButton.gameObject.SetActive (false);
 					SaveImageVideo.SetActive (false);
 					SaveImageDiamond.SetActive (true);
 					saveMe.SetActive (true);
@@ -242,14 +288,16 @@ public class BallController : MonoBehaviour {
 					rb.velocity = new Vector3 (0, -25f, 0);
 				diamondSaveMeCount = 1;	
 			} else if (videoSaveMeCount == 0 && ScoreManagerScript.instance.score > 20) {
-				videoSaveMeCount = 1;	
-				videoSaveMe = true;
+					videoSaveMeCount = 1;	
+					videoSaveMe = true;
 					Text footext = SaveText.GetComponent<Text> ();
 					footext.text = "Get a life by watching a short Video!      ";
 					SaveImageDiamond.SetActive (false);
 					SaveImageVideo.SetActive (true);
 					saveMe.SetActive (true);
 					saveMeFlag = true;
+					am.gameSound.mute = true;	
+					UIManager.instance.pauseButton.gameObject.SetActive (false);
 					Camera.main.GetComponent<CameraFollow> ().gameOver = true;
 					rb.velocity = new Vector3 (0, -25f, 0);
 		//		}

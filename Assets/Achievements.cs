@@ -30,6 +30,7 @@ public static class Achievements
         public const string achievement_beginner = "CgkIgtbrnocZEAIQAQ"; // <GPGSID>
         public const string achievement_pro = "CgkIgtbrnocZEAIQBA"; // <GPGSID>
         public const string leaderboard_best_players = "CgkIgtbrnocZEAIQAA"; // <GPGSID>
+        public const string achievement_1000_rounds = "CgkIgtbrnocZEAIQCg"; // <GPGSID>
 
 }
 

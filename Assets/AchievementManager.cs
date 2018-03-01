@@ -32,24 +32,28 @@ public class AchievementManager : MonoBehaviour {
 		}
 	}
 	public void CheckAchievements(){
-		if (ScoreManagerScript.instance.score > 10) {
+		if (ScoreManagerScript.instance.score > 30) {
 			Social.ReportProgress (Achievements.achievement_beginner, 100f, (bool success) => {
 			});
 		}
-		if (ScoreManagerScript.instance.score > 30) {
+		if (ScoreManagerScript.instance.score > 100) {
 			Social.ReportProgress (Achievements.achievement_intermediate, 100f, (bool success) => {
 			});
 		}
-		if (ScoreManagerScript.instance.score > 100) {
+		if (ScoreManagerScript.instance.score > 300) {
 			Social.ReportProgress (Achievements.achievement_awesome, 100f, (bool success) => {
 			});
 		}
-		if (ScoreManagerScript.instance.score > 200) {
+		if (ScoreManagerScript.instance.score > 500) {
 			Social.ReportProgress (Achievements.achievement_pro, 100f, (bool success) => {
 			});
 		}
-		if (ScoreManagerScript.instance.score > 500) {
+		if (ScoreManagerScript.instance.score > 1000) {
 			Social.ReportProgress (Achievements.achievement_expert, 100f, (bool success) => {
+			});
+		}
+		if (PlayerPrefs.GetInt("Round") > 1000) {
+			Social.ReportProgress (Achievements.achievement_1000_rounds, 100f, (bool success) => {
 			});
 		}
 	}
