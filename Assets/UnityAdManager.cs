@@ -54,7 +54,7 @@ public class UnityAdManager : MonoBehaviour {
 		
 	public void ShowRewardedVideoAdContinueGame() {
 		var options = new ShowOptions { resultCallback = HandleShowResult };
-		Advertisement.Show("rewardedVedio", options);
+		Advertisement.Show("rewardedVedio1", options);
 	}
 
 	private void HandleShowResult(ShowResult result)

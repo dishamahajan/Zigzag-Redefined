@@ -121,7 +121,7 @@ public class BallController : MonoBehaviour {
 	public void SaveMe () {
 		
 		if (videoSaveMe) {
-			if (Advertisement.IsReady ("rewardedVedio")) {
+			if (Advertisement.IsReady ("rewardedVedio1")) {
 				internetConnection.SetActive (false);
 				UnityAdManager.instance.ShowRewardedVideoAdContinueGame ();
 				GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().StartSpawningPlatform ();
