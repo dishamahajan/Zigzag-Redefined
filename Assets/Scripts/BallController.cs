@@ -118,8 +118,7 @@ public class BallController : MonoBehaviour {
 		}
 	}
 
-	public void SaveMe () {
-		
+	public void SaveMe () {		
 		if (videoSaveMe) {
 			if (Advertisement.IsReady ("rewardedVedio1")) {
 				internetConnection.SetActive (false);
@@ -205,8 +204,9 @@ public class BallController : MonoBehaviour {
 				diamondAudioController.diamondAudioSource.mute = false;
 			}
 		} else {
+			PlayerPrefs.SetString("mute","false");
 			diamondAudioController.diamondAudioSource.mute = false;
-		}
+		} 
 
 	}
 	// Use this for initialization
@@ -268,15 +268,15 @@ public class BallController : MonoBehaviour {
 			 
 		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver && diamondSaveMeCount != 1 && videoSaveMeCount != 1) {
 				ScoreManagerScript.instance.stopScore ();
-			if (diamondSaveMeCount < 1 && ((ScoreManagerScript.instance.score > 20 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 249) || (ScoreManagerScript.instance.score > 110 && PlayerPrefs.GetInt ("diamondScore1") > 999))){
+			if (diamondSaveMeCount < 1 && ((ScoreManagerScript.instance.score > 10 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 249) || (ScoreManagerScript.instance.score > 500 && PlayerPrefs.GetInt ("diamondScore1") > 999))){
 					diamondSaveMe = true;	
 					Text footext = SaveText.GetComponent<Text> ();
 					if (ScoreManagerScript.instance.score > 999) {
 						minusDiamondCount = 1000;
 						footext.text = "Get a life- 1000 ";
 					} else {
-						minusDiamondCount = 500;
-						footext.text = "Get a life - 500 ";
+						minusDiamondCount = 250;
+						footext.text = "Get a life - 250 ";
 					}
 					am.gameSound.mute = true;	
 					UIManager.instance.pauseButton.gameObject.SetActive (false);
@@ -287,7 +287,7 @@ public class BallController : MonoBehaviour {
 					Camera.main.GetComponent<CameraFollow> ().gameOver = true;
 					rb.velocity = new Vector3 (0, -25f, 0);
 				diamondSaveMeCount = 1;	
-			} else if (videoSaveMeCount == 0 && ScoreManagerScript.instance.score > 20) {
+			} else if (videoSaveMeCount == 0 && ScoreManagerScript.instance.score > 10) {
 					videoSaveMeCount = 1;	
 					videoSaveMe = true;
 					Text footext = SaveText.GetComponent<Text> ();

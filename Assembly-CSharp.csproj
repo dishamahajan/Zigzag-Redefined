@@ -56,6 +56,12 @@
      <Compile Include="Assets\AudioManager.cs" />
      <Compile Include="Assets\DiamondAudioController.cs" />
      <Compile Include="Assets\DiamondTriggerChecker.cs" />
+     <Compile Include="Assets\Fonts\Api\GoogleApiClient.cs" />
+     <Compile Include="Assets\Fonts\Api\PendingResult.cs" />
+     <Compile Include="Assets\Fonts\Api\Result.cs" />
+     <Compile Include="Assets\Fonts\Api\ResultCallback.cs" />
+     <Compile Include="Assets\Fonts\Api\ResultCallbackProxy.cs" />
+     <Compile Include="Assets\Fonts\Api\Status.cs" />
      <Compile Include="Assets\GameManager.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
      <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
@@ -108,12 +114,6 @@
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidTokenClient.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\Developers\JavaInterfaceProxy.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\Developers\JavaObjWrapper.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\GoogleApiClient.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\PendingResult.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\Result.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\ResultCallback.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\ResultCallbackProxy.cs" />
-     <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\Api\Status.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Common\ConnectionResult.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Games\Games.cs" />
      <Compile Include="Assets\GooglePlayGames\Platforms\Android\Gms\Games\Stats\LoadPlayerStatsResultObject.cs" />
