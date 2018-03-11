@@ -185,7 +185,6 @@ public class BallController : MonoBehaviour {
 	}
 
 	void Awake(){
-
 		if (instance == null) {
 			instance = this;
 		}
@@ -228,8 +227,7 @@ public class BallController : MonoBehaviour {
 			//internetConnection.SetActive (true);
 				showToastOnUiThread ("Press again to exit!");
 				StartCoroutine (quitingTimer ());
-			}
-
+		}else {
 			if (ScoreManagerScript.instance.score > 300 && !is300) {
 				speed = 9;
 				is300 = true;
@@ -266,8 +264,8 @@ public class BallController : MonoBehaviour {
 				}
 			}
 			 
-		if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver && diamondSaveMeCount != 1 && videoSaveMeCount != 1) {
-				ScoreManagerScript.instance.stopScore ();
+			if (!Physics.Raycast (transform.position, Vector3.down, 1f) && !gameOver && diamondSaveMeCount != 1 && videoSaveMeCount != 1 ) {
+			ScoreManagerScript.instance.stopScore ();
 			if (diamondSaveMeCount < 1 && ((ScoreManagerScript.instance.score > 10 && ScoreManagerScript.instance.score < 101 && PlayerPrefs.GetInt ("diamondScore1") > 249) || (ScoreManagerScript.instance.score > 500 && PlayerPrefs.GetInt ("diamondScore1") > 999))){
 					diamondSaveMe = true;	
 					Text footext = SaveText.GetComponent<Text> ();
@@ -301,16 +299,15 @@ public class BallController : MonoBehaviour {
 					Camera.main.GetComponent<CameraFollow> ().gameOver = true;
 					rb.velocity = new Vector3 (0, -25f, 0);
 		//		}
-			}else {
+			} else {
 				if(videoSaveMeCount != 1 && diamondSaveMeCount != 1)
 					NotSaveMe ();
 			}
 			GameObject.Find ("PlaformSpawner").GetComponent<PlaformSpawner> ().CancelSpawningPllatform ();
-			}
-
-			if (Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1 && !saveMeFlag) {
+			}else if (Input.GetMouseButtonDown (0) && !gameOver && Time.timeScale == 1 && !saveMeFlag) {
 				SwitchDirection ();
 			}
+		}
 	}
 
 	public void SwitchDirection(){

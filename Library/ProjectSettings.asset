@@ -244,7 +244,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/Akash/Downloads/zigzagredefinedKeystore.keystore
+  AndroidKeystoreName: C:/unity apps/KeyStore/ZigZag Redefined/zigzagredefinedKeystore.keystore
   AndroidKeyaliasName: zigzag redefined
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

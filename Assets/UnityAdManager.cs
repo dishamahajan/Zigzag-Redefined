@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.UI;
 
 public class UnityAdManager : MonoBehaviour {
 
 	public static UnityAdManager instance;
+	public Text DiamondText;
 
 	void Awake(){
 		DontDestroyOnLoad (this.gameObject);
@@ -26,24 +28,28 @@ public class UnityAdManager : MonoBehaviour {
 	}
 
 	public void ShowAd() {
-		
-		if (PlayerPrefs.HasKey ("AdCount")) {
-			if (PlayerPrefs.GetInt ("AdCount") == 5) {
-				if (Advertisement.IsReady ("video2")) {
-					Advertisement.Show ("video2");
+		if (!PlayerPrefs.HasKey ("showAds")) {
+			PlayerPrefs.SetString ("showAds","true");
+		}
+		if (PlayerPrefs.GetString ("showAds").Equals ("true")) {
+			if (PlayerPrefs.HasKey ("AdCount")) {
+				if (PlayerPrefs.GetInt ("AdCount") == 5) {
+					if (Advertisement.IsReady ("video2")) {
+						Advertisement.Show ("video2");
+					}
+					PlayerPrefs.SetInt ("AdCount", PlayerPrefs.GetInt ("AdCount") + 1);
+				} else if (PlayerPrefs.GetInt ("AdCount") == 10) {
+					if (Advertisement.IsReady ("video")) {
+						Advertisement.Show ("video");
+					}
+					PlayerPrefs.SetInt ("AdCount", 0);
+				} else {
+					PlayerPrefs.SetInt ("AdCount", PlayerPrefs.GetInt ("AdCount") + 1);
 				}
-				PlayerPrefs.SetInt ("AdCount", PlayerPrefs.GetInt ("AdCount") + 1);
-			} else if (PlayerPrefs.GetInt ("AdCount") == 10) {
-				if (Advertisement.IsReady ("video")) {
-					Advertisement.Show ("video");
-				}
+			} else {
 				PlayerPrefs.SetInt ("AdCount", 0);
-			}else {
-				PlayerPrefs.SetInt ("AdCount", PlayerPrefs.GetInt ("AdCount") + 1);
-			}
-		} else {
-			PlayerPrefs.SetInt ("AdCount", 0);
-		}	
+			}	
+		}
 	}
 
 	public void ShowRewardedVideoAd() {
@@ -82,6 +88,7 @@ public class UnityAdManager : MonoBehaviour {
 			Debug.Log ("The ad was successfully shown.");
 			if (PlayerPrefs.HasKey ("diamondScore1")) {
 				PlayerPrefs.SetInt ("diamondScore1", PlayerPrefs.GetInt ("diamondScore1") + 50);
+				DiamondText.text = "x "+ PlayerPrefs.GetInt ("diamondScore1").ToString();
 			} else {
 				PlayerPrefs.SetInt ("diamondScore1", 0);
 			}

@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject gameOverPanel;
 	public GameObject tapText;
 	public GameObject leaderBoardButton;
+	public GameObject ShopButton;
 	public GameObject AchievementButton;
 	public GameObject MuteButton;
 	public GameObject ShareButton;
@@ -58,6 +59,7 @@ public class UIManager : MonoBehaviour {
 		diamondPanel.SetActive(false);
 		leaderBoardButton.SetActive (false);
 		AchievementButton.SetActive (false);
+		ShopButton.SetActive (false);
 		scoreButton.gameObject.SetActive (true);
 		pauseButton.gameObject.SetActive (true);
 		MuteButton.SetActive (false);
